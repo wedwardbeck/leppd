@@ -1,11 +1,10 @@
-app_name: iqport
-app_package: iqport
-app_callable: application
+app_name: djapp
+app_package: djangoapp
+app_callable: app
 # Need to add in base_dir and appdata_dir
 nginx_server_name: 'localhost {{ app_name }}.local'
 nginx_http_port: 80
 uwsgi_module: '{{ app_package }}:{{ app_callable }}'
 uwsgi_processes: 1
-uwsgi_threads: 1
-uwsgi_env:
+uwsgi_threads:uwsgi_env:
  - 'DJANGO_SETTINGS_MODULE={{ app_package }}.settings'

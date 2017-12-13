@@ -1,5 +1,18 @@
-app_name: iqport
-app_package: iqport
+---
+ansible_python_interpreter: "/usr/bin/python3"
+repo_url: ssh://git@github.com:wedwardbeck
+repo: iqport
+user: felix
+home_dir: /home/{{ user }}
+repo_dir: "{{ home_dir }}/{{ repo }}"
+django_dir: "{{ repo_dir }}/django"
+static_dir: "{{ home_dir }}/static"
+django_project: yourproject
+dbname: django
+dbuser: django
+dbpassword: "{{ lookup('password', 'postgresqlpasswd') }}"
+app_name: {{ repo }}
+app_package: {{ repo }}
 app_callable: application
 # Need to add in base_dir and appdata_dir
 nginx_server_name: 'localhost {{ app_name }}.local'
@@ -8,4 +21,6 @@ uwsgi_module: '{{ app_package }}:{{ app_callable }}'
 uwsgi_processes: 1
 uwsgi_threads: 1
 uwsgi_env:
- - 'DJANGO_SETTINGS_MODULE={{ app_package }}.settings'
+ - 'DJANGO_SETTINGS_MODULE={{ app_package }}.config.settings.production'
+git_repo: git@github.com:wedwardbeck/iqport.git
+git_branch: master

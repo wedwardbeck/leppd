@@ -4,7 +4,6 @@
     user: felix
     state: present
     key: "{{ lookup('file', lookup('env','HOME') + '/.ssh/id_rsa.pub') }}"
-    # key: "{{ lookup('file', '/home/charlie/.ssh/id_rsa.pub') }}"
 - name: Make sure we have a 'wheel' group
   group:
     name: wheel

@@ -11,8 +11,8 @@ django_project: yourproject
 dbname: django
 dbuser: django
 dbpassword: "{{ lookup('password', 'postgresqlpasswd') }}"
-app_name: {{ repo }}
-app_package: {{ repo }}
+app_name: "{{ repo }}"
+app_package: "{{ repo }}"
 app_callable: application
 # Need to add in base_dir and appdata_dir
 nginx_server_name: 'localhost {{ app_name }}.local'

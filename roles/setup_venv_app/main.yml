@@ -1,25 +1,21 @@
 ---
-- name: Remove base directory (if present)
-  file:
-    path: '{{ base_dir }}'
-    state: absent
-
 - name: Create a virtual environment
-  command: "{{ virtualenv_cmd }} '{{ base_dir }}'"
-
-- name: Clone Git repository
-  git:
-    repo: '{{ git_repo }}'
-    dest: '{{ appdata_dir }}'
-    version: '{{ git_branch }}'
-
-- name: Install requirements.txt
-  command: "'{{ base_dir }}/bin/pip' install -r '{{ appdata_dir }}/requirements.txt'"
+  command: mkvirtualenv "{{ repo }}"
 
 - name: Set permissions for base directory
   file:
-    path: '{{ base_dir }}'
+    path: '{{ repo }}'
     owner: '{{ uid }}'
     group: '{{ gid }}'
     state: directory
     recurse: yes
+
+#- name: Log Deploy Key
+#  pause: prompt='Please capture key for deployment! Press return to continue. Press Ctrl+c and then "a" to abort'
+
+#- name: Install requirements
+#  pip:
+#    requirements: /{{ repo }}/requirements.txt
+#    virtualenv: /home/{{ user }}/Env/{{ repo }}
+#    virtualenv_python: python3.5
+

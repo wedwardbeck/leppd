@@ -1,0 +1,15 @@
+---
+- name: Add bashrc lines
+  lineinfile:
+    path: /home/felix/.bashrc
+    line: export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
+
+- name: Add bashrc lines
+  lineinfile:
+    path: /home/felix/.bashrc
+    line: export WORKON_HOME=~/Env
+
+- name: Add bashrc lines
+  lineinfile:
+    path: /home/felix/.bashrc
+    line: source /usr/local/bin/virtualenvwrapper.sh

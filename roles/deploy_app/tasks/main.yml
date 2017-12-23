@@ -1,0 +1,12 @@
+---
+- name: Install app requirements
+  pip:
+    requirements: /home/{{user}}/{{ repo }}/requirements.txt
+    virtualenv: /home/{{ user }}/Env/{{ repo }}
+    virtualenv_python: python3.5
+
+
+#  command: "{{ virtualenv_cmd }} '{{ base_dir }}'"
+#
+#- name: Install requirements.txt
+#  command: "'{{ base_dir }}/bin/pip' install -r '{{ appdata_dir }}/requirements.txt'"

@@ -1,0 +1,8 @@
+---
+- name: Run Pip Install Requirements
+  hosts: ansdev
+  become: yes
+  become_user: "{{ user }}"
+  gather_facts: no
+  roles:
+     - deploy_app

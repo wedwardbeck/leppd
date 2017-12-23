@@ -1,0 +1,22 @@
+---
+- name: Nginx | Allow Nginx HTTPS in UFW
+  ufw:
+    rule: allow
+    name: 'Nginx Full'
+
+- name: Allow OpenSSH in UFW
+  ufw:
+    rule: allow
+    name: 'OpenSSH'
+
+- name: Allow all access to tcp port 8000
+  ufw:
+    rule: allow
+    port: 8000
+    proto: tcp
+
+- name: Set firewall default policy
+  ufw: state=enabled policy=deny
+
+- name: Verify Default Nginx Site
+  pause: prompt='Please verify page resolves for HTTP Nginx Install. Press return to continue. Press Ctrl+c and then "a" to abort'

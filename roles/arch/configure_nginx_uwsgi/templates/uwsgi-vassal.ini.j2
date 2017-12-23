@@ -1,4 +1,25 @@
 [uwsgi]
+project = firstsite
+uid = sammy
+base = /home/%(uid)
+
+chdir = %(base)/%(project)
+home = %(base)/Env/%(project)
+module = %(project).wsgi:application
+
+master = true
+processes = 5
+
+socket = /run/uwsgi/%(project).sock
+chown-socket = %(uid):www-data
+chmod-socket = 660
+vacuum = true
+
+
+
+
+
+
 socket = {{ base_dir }}/uwsgi.sock
 chmod-socket = 775
 chdir = {{ appdata_dir }}

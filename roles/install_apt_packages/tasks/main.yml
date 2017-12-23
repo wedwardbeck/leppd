@@ -1,0 +1,30 @@
+---
+- name: Running apt update
+  apt: update_cache=yes
+
+- name: Installing required packages - Apt
+  apt: name={{item}} state=present
+  with_items:
+   - fail2ban
+   - postgresql
+   - postgresql-client
+   - python3
+   - python3-pip
+   - python3-dev
+   - rdiff-backup
+   - libpq-dev
+   - python3-psycopg2
+   - nginx-full
+
+- name: Add Certbot Repo
+  apt_repository:
+    repo: ppa:certbot/certbot
+    state: present
+
+- name: Running apt update
+  apt: update_cache=yes
+
+- name: Installing required packages - Apt
+  apt: name={{item}} state=present
+  with_items:
+   - python-certbot-nginx

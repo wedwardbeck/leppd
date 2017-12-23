@@ -1,0 +1,28 @@
+---
+- name: Run Pip Install Requirements
+  hosts: ansdev
+  become: yes
+  become_user: "{{ user }}"
+  gather_facts: no
+  roles:
+     - deploy_app
+
+- name: Run Pip Install Requirements
+  hosts: ansdev
+  gather_facts: no
+  roles:
+     - secure_firewall
+
+
+
+#- hosts: ansdev
+#  gather_facts: False
+#  become: yes
+#  become_user: root
+#  roles:
+#     - install_Debian_Ubuntu
+#     - setup_venv_app
+#     - patch_config_Debian_Ubuntu
+#     - configure_nginx_uwsgi
+#     - create_service_Debian_Ubuntu
+#     - start_services

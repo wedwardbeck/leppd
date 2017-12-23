@@ -1,0 +1,19 @@
+---
+- name: Upgrade Pip
+  pip:
+    executable: pip3
+    name: pip
+    extra_args: --upgrade
+
+- name: Install Venv & Wrapper
+  pip:
+    executable: pip3
+    name: virtualenv virtualenvwrapper
+
+- name: Install uWSGI
+  pip:
+    executable: pip3
+    name: uwsgi
+
+- name: Create uWSGI Sites Directory
+  file: name=/etc/uwsgi/sites state=directory recurse=yes

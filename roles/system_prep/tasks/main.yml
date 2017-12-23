@@ -1,7 +1,22 @@
 ---
+- name: ensure aptitude is installed
+  apt: name=aptitude state=present
+
 - name: Create ubuntu user
   user:
     name: "{{user}}"
     shell: /bin/bash
     groups: admin
     append: yes
+    generate_ssh_key: yes
+    ssh_key_bits: 2048
+    ssh_key_file: .ssh/id_rsa
+
+- name: Read SSH public key
+  slurp:
+    src: /home/felix/.ssh/id_rsa.pub
+  register: public_key
+- debug: msg="{{ public_key['content'] | b64decode }}"
+
+- name: Log Deploy Key
+  pause: prompt='Please capture key for deployment! Press return to continue. Press Ctrl+c and then "a" to abort'

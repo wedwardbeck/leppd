@@ -11,44 +11,27 @@
      - system_prep
      - set_perms
 
-#- name: Perform Update & Upgrade
-#  hosts: all
-#  become: yes
-#  become_user: root
-#  gather_facts: no
-#  roles:
-#     - system_upgrade
+- name: Perform Update & Upgrade & Installs
+  hosts: ansdev
+  become: yes
+  become_user: root
+  gather_facts: no
+  roles:
+     - system_upgrade
+     - install_apt_packages
+     - install_pip_packages
+     - set_bashvars
+     - setup_venv_app
+
+- name: Create Database
+  hosts: ansdev
+  become: yes
+  become_user: postgres
+  gather_facts: no
+  roles:
+     - create_postgres_db
 #
-#- name: Install Packages
-#  hosts: all
-#  become: yes
-#  become_user: root
-#  gather_facts: no
-#  roles:
-#     - install_packages
-#
-#- name: Create Database
-#  hosts: all
-#  become: yes
-#  become_user: postgres
-#  gather_facts: no
-#  roles:
-#     - create_postgres_db
-
-
-
-
-#- name: Install nginx and uWSGI for a Python web application (pyweb)
-#  hosts: all
-#  become: yes
-#  become_user: root
-
-# talk to all hosts just so we can learn about them
-#- hosts: all
-#  tasks:
-#     - group_by: key=os_{{ ansible_distribution }}
-#
-#- hosts: os_Debian:os_Ubuntu
+#- hosts: ansdev
 #  gather_facts: False
 #  become: yes
 #  become_user: root
@@ -58,41 +41,4 @@
 #     - patch_config_Debian_Ubuntu
 #     - configure_nginx_uwsgi
 #     - create_service_Debian_Ubuntu
-#     - start_services
-#
-#- hosts: os_Fedora
-#  gather_facts: False
-#  become: yes
-#  become_user: root
-#  roles:
-#     - install_Fedora
-#     - {role: cleanup_selinux_CentOS_Fedora, when: not skip_selinux}
-#     - setup_venv_app
-#     - patch_config_CentOS_Fedora
-#     - configure_nginx_uwsgi
-#     - {role: selinux_policy_CentOS_Fedora, when: not skip_selinux}
-#     - start_services
-#
-#- hosts: os_CentOS
-#  gather_facts: False
-#  become: yes
-#  become_user: root
-#  roles:
-#     - install_CentOS
-#     - {role: cleanup_selinux_CentOS_Fedora, when: not skip_selinux}
-#     - setup_venv_app
-#     - patch_config_CentOS_Fedora
-#     - configure_nginx_uwsgi
-#     - {role: selinux_policy_CentOS_Fedora, when: not skip_selinux}
-#     - start_services
-#
-#- hosts: os_Archlinux
-#  gather_facts: False
-#  become: yes
-#  become_user: root
-#  roles:
-#     - install_Archlinux
-#     - setup_venv_app
-#     - patch_config_Archlinux
-#     - configure_nginx_uwsgi
 #     - start_services
